@@ -1,0 +1,31 @@
+// Increment
+LOAD_GENOME "l" // No nops -> reg b 
+SET_REG 'b' 10
+CHECK_REG 'b' 10
+EXECUTE 1
+CHECK_REG 'b' 11
+LOAD_GENOME "la" // NopA -> reg a
+SET_REG 'a' 10
+CHECK_REG 'a' 10
+EXECUTE 1
+CHECK_REG 'a' 11
+LOAD_GENOME "lb" // NopB -> reg b
+SET_REG 'b' 10
+CHECK_REG 'b' 10
+EXECUTE 1
+CHECK_REG 'b' 11
+LOAD_GENOME "lc" // NopC -> reg c
+SET_REG 'c' 10
+CHECK_REG 'c' 10
+EXECUTE 1
+CHECK_REG 'c' 11
+
+LOAD_GENOME "abcdefghijklmnopqrstuvwxyz"
+SET_IP 10
+CHECK_IP 10
+SET_RH 10
+CHECK_RH 10
+SET_WH 10
+CHECK_WH 10
+SET_FH 10
+CHECK_FH 10
