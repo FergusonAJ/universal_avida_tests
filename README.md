@@ -55,7 +55,7 @@ class UAT_Interpreter_Example(UAT_Interpreter_Base):
 ```
 
 ### C++
-The C++ interpeter defines a `UATInterpreter` class. 
+The C++ interpeter defines a `uat::UATInterpreter` class. 
 To run uat files, simply create a class that inherits from `UATInterpreter`. (Note that it is templated on the register/head data type of you Avida hardware). 
 `UATInterpreter` contains pure virtual methods that must be overridden in your derived class (one per keyword). If you miss any, the compiler will error. 
 For keywords that are checking values, either `succesful_checks` or `failed_checks` should be incremented depending on the outcome.
