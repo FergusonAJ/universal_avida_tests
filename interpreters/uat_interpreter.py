@@ -172,7 +172,7 @@ class UAT_Interpreter_Base():
       self.throw_line_error(error_str)
     idx = int(line_parts[0])
     expected_val = int(line_parts[1])
-    self.check_stack_a(idx, expected_val)
+    self.check_stack_b(idx, expected_val)
 
   def trigger_undefined_keyword(self, keyword):
     print(self.ansi_code_error + 'Error! ' + keyword + ' has not been defined in the interpreter!' + self.ansi_code_clear)
