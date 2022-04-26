@@ -1,6 +1,6 @@
 # uat - universal avida tests
 
-This repository contains implementation- and language-agnostic test cases for Avida. This allows different implmentations to ensure they behave identically when executing an Avida organism with a given genome and hardware values. 
+This repository contains implementation- and language-agnostic test cases for [Avida](https://github.com/devosoft/avida). This allows different implmentations to ensure they behave identically when executing an Avida organism with a given genome and hardware values. 
 
 Currently, tests exist for the [default Avida instruction set](https://github.com/devosoft/avida/wiki/Instruction-Set), except for `h-alloc`, `h-divide`, `h-copy`, `h-search`, and `if-label`. 
 
@@ -63,7 +63,7 @@ For keywords that are checking values, either `succesful_checks` or `failed_chec
 To use your new derived class, simply create an instance (either passing a filename/istream to the constructor or to a call to `Load()`) and call the `Process()` method. 
 To then view the number of successful and failed test cases, simply call the `PrintResults()` method.
 
-
+*Note*: the C++ interpreter depends on Empirical (https://github.com/devosoft/Empirical/). In the future, this may be included as a submodule, but for now it must be added manually. It is recommended to build your Makefile off of an existing Empirical Makefile [(example)](https://github.com/devosoft/Empirical/blob/master/examples/base/Makefile). 
 
 Here's an example derived class + method for `LOAD_GENOME`:
 ```
