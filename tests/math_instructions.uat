@@ -1,0 +1,236 @@
+// Test head manipulation
+  LOAD_GENOME "abcdefghijklmnopqrstuvwxyz"
+  SET_IP 10
+  CHECK_IP 10
+  SET_RH 11
+  CHECK_RH 11
+  SET_WH 12
+  CHECK_WH 12
+  SET_FH 13
+  CHECK_FH 13
+
+// Increment
+  LOAD_GENOME "l"// No nops -> reg b 
+  SET_REG 'b' 10
+  CHECK_REG 'b' 10
+  EXECUTE 1
+  CHECK_REG 'b' 11
+  LOAD_GENOME "la" // NopA -> reg a
+  SET_REG 'a' 10
+  CHECK_REG 'a' 10
+  EXECUTE 1
+  CHECK_REG 'a' 11
+  LOAD_GENOME "lb" // NopB -> reg b
+  SET_REG 'b' 10
+  CHECK_REG 'b' 10
+  EXECUTE 1
+  CHECK_REG 'b' 11
+  LOAD_GENOME "lc" // NopC -> reg c
+  SET_REG 'c' 10
+  CHECK_REG 'c' 10
+  EXECUTE 1
+  CHECK_REG 'c' 11
+
+// Decrement
+  LOAD_GENOME "m"// No nops -> reg b 
+  SET_REG 'b' 10
+  CHECK_REG 'b' 10
+  EXECUTE 1
+  CHECK_REG 'b' 9 
+  LOAD_GENOME "ma" // NopA -> reg a
+  SET_REG 'a' 10
+  CHECK_REG 'a' 10
+  EXECUTE 1
+  CHECK_REG 'a' 9 
+  LOAD_GENOME "mb" // NopB -> reg b
+  SET_REG 'b' 10
+  CHECK_REG 'b' 10
+  EXECUTE 1
+  CHECK_REG 'b' 9 
+  LOAD_GENOME "mc" // NopC -> reg c
+  SET_REG 'c' 10
+  CHECK_REG 'c' 10
+  EXECUTE 1
+  CHECK_REG 'c' 9 
+
+// Shift Right 
+  LOAD_GENOME "j"// No nops -> reg b 
+  SET_REG 'b' 10
+  CHECK_REG 'b' 10 
+  EXECUTE 1
+  CHECK_REG 'b' 5
+  LOAD_GENOME "ja" // NopA -> reg a
+  SET_REG 'a' 10
+  CHECK_REG 'a' 10
+  EXECUTE 1
+  CHECK_REG 'a' 5 
+  LOAD_GENOME "jb" // NopB -> reg b
+  SET_REG 'b' 10
+  CHECK_REG 'b' 10
+  EXECUTE 1
+  CHECK_REG 'b' 5 
+  LOAD_GENOME "jc" // NopC -> reg c
+  SET_REG 'c' 10
+  CHECK_REG 'c' 10
+  EXECUTE 1
+  CHECK_REG 'c' 5
+
+// Shift Left 
+  LOAD_GENOME "k"// No nops -> reg b 
+  SET_REG 'b' 10
+  CHECK_REG 'b' 10 
+  EXECUTE 1
+  CHECK_REG 'b' 20
+  LOAD_GENOME "ka" // NopA -> reg a
+  SET_REG 'a' 10
+  CHECK_REG 'a' 10
+  EXECUTE 1
+  CHECK_REG 'a' 20 
+  LOAD_GENOME "kb" // NopB -> reg b
+  SET_REG 'b' 10
+  CHECK_REG 'b' 10
+  EXECUTE 1
+  CHECK_REG 'b' 20 
+  LOAD_GENOME "kc" // NopC -> reg c
+  SET_REG 'c' 10
+  CHECK_REG 'c' 10
+  EXECUTE 1
+  CHECK_REG 'c' 20
+
+// Add
+  LOAD_GENOME "n" // No nops -> B = B + C
+  SET_REG 'a' 3
+  SET_REG 'b' 5
+  SET_REG 'c' 10
+  CHECK_REG 'a' 3
+  CHECK_REG 'b' 5 
+  CHECK_REG 'c' 10
+  EXECUTE 1
+  CHECK_REG 'a' 3
+  CHECK_REG 'b' 15 
+  CHECK_REG 'c' 10
+  LOAD_GENOME "na" // Nop A -> A = B + C
+  SET_REG 'a' 3
+  SET_REG 'b' 5
+  SET_REG 'c' 10
+  CHECK_REG 'a' 3
+  CHECK_REG 'b' 5 
+  CHECK_REG 'c' 10
+  EXECUTE 1
+  CHECK_REG 'a' 15 
+  CHECK_REG 'b' 5 
+  CHECK_REG 'c' 10
+  LOAD_GENOME "nb" // Nop B -> B = B + C
+  SET_REG 'a' 3
+  SET_REG 'b' 5
+  SET_REG 'c' 10
+  CHECK_REG 'a' 3
+  CHECK_REG 'b' 5 
+  CHECK_REG 'c' 10
+  EXECUTE 1
+  CHECK_REG 'a' 3 
+  CHECK_REG 'b' 15 
+  CHECK_REG 'c' 10
+  LOAD_GENOME "nc" // Nop C -> C = B + C
+  SET_REG 'a' 3
+  SET_REG 'b' 5
+  SET_REG 'c' 10
+  CHECK_REG 'a' 3
+  CHECK_REG 'b' 5 
+  CHECK_REG 'c' 10
+  EXECUTE 1
+  CHECK_REG 'a' 3 
+  CHECK_REG 'b' 5 
+  CHECK_REG 'c' 15
+
+// Sub 
+  LOAD_GENOME "o" // No nops -> B = B - C
+  SET_REG 'a' 11
+  SET_REG 'b' 5
+  SET_REG 'c' 3 
+  CHECK_REG 'a' 11
+  CHECK_REG 'b' 5 
+  CHECK_REG 'c' 3
+  EXECUTE 1
+  CHECK_REG 'a' 11
+  CHECK_REG 'b' 2 
+  CHECK_REG 'c' 3
+  LOAD_GENOME "oa" // NopA -> A = B - C
+  SET_REG 'a' 11
+  SET_REG 'b' 5
+  SET_REG 'c' 3 
+  CHECK_REG 'a' 11 
+  CHECK_REG 'b' 5 
+  CHECK_REG 'c' 3
+  EXECUTE 1
+  CHECK_REG 'a' 2 
+  CHECK_REG 'b' 5 
+  CHECK_REG 'c' 3
+  LOAD_GENOME "ob" // NopB -> B = B - C
+  SET_REG 'a' 11
+  SET_REG 'b' 5
+  SET_REG 'c' 3 
+  CHECK_REG 'a' 11 
+  CHECK_REG 'b' 5 
+  CHECK_REG 'c' 3
+  EXECUTE 1
+  CHECK_REG 'a' 11 
+  CHECK_REG 'b' 2 
+  CHECK_REG 'c' 3
+  LOAD_GENOME "oc" // NopC -> C = B - C
+  SET_REG 'a' 11
+  SET_REG 'b' 5
+  SET_REG 'c' 3 
+  CHECK_REG 'a' 11 
+  CHECK_REG 'b' 5 
+  CHECK_REG 'c' 3
+  EXECUTE 1
+  CHECK_REG 'a' 11 
+  CHECK_REG 'b' 5 
+  CHECK_REG 'c' 2
+
+// Nand 
+  LOAD_GENOME "p" // No nops -> B = B nand C
+  SET_REG 'a' 3 
+  SET_REG 'b' 6
+  SET_REG 'c' 12 
+  CHECK_REG 'a' 3
+  CHECK_REG 'b' 6 
+  CHECK_REG 'c' 12
+  EXECUTE 1
+  CHECK_REG 'a' 3
+  CHECK_REG 'b' 4294967291 // 6 nand 12 = 1...1011 = 4294967291 if using uint32_t
+  CHECK_REG 'c' 12
+  LOAD_GENOME "pa" // NopA -> A = B nand C
+  SET_REG 'a' 3 
+  SET_REG 'b' 6
+  SET_REG 'c' 12 
+  CHECK_REG 'a' 3
+  CHECK_REG 'b' 6 
+  CHECK_REG 'c' 12
+  EXECUTE 1
+  CHECK_REG 'a' 4294967291 // 6 nand 12 = 1...1011 = 4294967291 if using uint32_t
+  CHECK_REG 'b' 6
+  CHECK_REG 'c' 12
+  LOAD_GENOME "pb" // NopB -> B = B nand C
+  SET_REG 'a' 3 
+  SET_REG 'b' 6
+  SET_REG 'c' 12 
+  CHECK_REG 'a' 3
+  CHECK_REG 'b' 6 
+  CHECK_REG 'c' 12
+  EXECUTE 1
+  CHECK_REG 'a' 3
+  CHECK_REG 'b' 4294967291 // 6 nand 12 = 1...1011 = 4294967291 if using uint32_t
+  CHECK_REG 'c' 12
+  LOAD_GENOME "pc" // NopC -> C = B nand C
+  SET_REG 'a' 3 
+  SET_REG 'b' 6
+  SET_REG 'c' 12 
+  CHECK_REG 'a' 3
+  CHECK_REG 'b' 6 
+  CHECK_REG 'c' 12
+  EXECUTE 1
+  CHECK_REG 'a' 3
+  CHECK_REG 'b' 6 
+  CHECK_REG 'c' 4294967291 // 6 nand 12 = 1...1011 = 4294967291 if using uint32_t

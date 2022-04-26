@@ -1,0 +1,374 @@
+// Register manipulation instructions
+  // Swap
+    LOAD_GENOME "i" // No nops -> Swap registers B and C 
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_REG 'a' 1
+    CHECK_REG 'b' 3
+    CHECK_REG 'c' 2
+    LOAD_GENOME "ia" // NopA -> Swap registers A and B 
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_REG 'a' 2
+    CHECK_REG 'b' 1
+    CHECK_REG 'c' 3
+    LOAD_GENOME "ib" // NopB -> Swap registers B and C 
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_REG 'a' 1
+    CHECK_REG 'b' 3
+    CHECK_REG 'c' 2
+    LOAD_GENOME "ic" // NopC -> Swap registers C and A 
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_REG 'a' 3
+    CHECK_REG 'b' 2
+    CHECK_REG 'c' 1
+    
+// Head manipulation instructions
+  // Get head
+    LOAD_GENOME "xxxxxxxxxxxx" // No nops -> c = IP
+    SET_IP 5
+    CHECK_IP 5
+    SET_RH 6
+    CHECK_RH 6
+    SET_WH 7
+    CHECK_WH 7
+    SET_FH 8
+    CHECK_FH 8
+    SET_REG 'c' 0
+    EXECUTE 1
+    CHECK_REG 'c' 5
+    LOAD_GENOME "xxxxxxaxxxxx" // NopA -> c = IP
+    SET_IP 5
+    CHECK_IP 5
+    SET_RH 7
+    CHECK_RH 7
+    SET_WH 8
+    CHECK_WH 8
+    SET_FH 9
+    CHECK_FH 9
+    SET_REG 'c' 0
+    EXECUTE 1
+    CHECK_REG 'c' 6 // Turns out that we DO advance the IP first
+    LOAD_GENOME "xxxxxxbxxxxx" // NopB -> c = RH 
+    SET_IP 5
+    CHECK_IP 5
+    SET_RH 7
+    CHECK_RH 7
+    SET_WH 8
+    CHECK_WH 8
+    SET_FH 9
+    CHECK_FH 9
+    SET_REG 'c' 0
+    EXECUTE 1
+    CHECK_REG 'c' 7
+    LOAD_GENOME "xxxxxxcxxxxx" // NopC -> c = FH 
+    SET_IP 5
+    CHECK_IP 5
+    SET_RH 7
+    CHECK_RH 7
+    SET_WH 8
+    CHECK_WH 8
+    SET_FH 9
+    CHECK_FH 9
+    SET_REG 'c' 0
+    EXECUTE 1
+    CHECK_REG 'c' 8
+  // Jump head
+    LOAD_GENOME "wxxxxxxxxxxx" // No nops -> IP += Reg C
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 3
+    CHECK_FH 3
+    SET_REG 'a' 2
+    CHECK_REG 'a' 2
+    SET_REG 'b' 3
+    CHECK_REG 'b' 3
+    SET_REG 'c' 4
+    CHECK_REG 'c' 4
+    EXECUTE 1
+    CHECK_IP 5
+    CHECK_RH 1
+    CHECK_WH 2
+    CHECK_FH 3
+    CHECK_REG 'a' 2
+    CHECK_REG 'b' 3
+    CHECK_REG 'c' 4
+    LOAD_GENOME "waxxxxxxxxxx" // NopA -> IP += Reg C
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 3
+    CHECK_FH 3
+    SET_REG 'a' 2
+    CHECK_REG 'a' 2
+    SET_REG 'b' 3
+    CHECK_REG 'b' 3
+    SET_REG 'c' 4
+    CHECK_REG 'c' 4
+    EXECUTE 1
+    CHECK_IP 6
+    CHECK_RH 1
+    CHECK_WH 2
+    CHECK_FH 3
+    CHECK_REG 'a' 2
+    CHECK_REG 'b' 3
+    CHECK_REG 'c' 4
+    LOAD_GENOME "wbxxxxxxxxxx" // NopB -> RH += Reg C
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 3
+    CHECK_FH 3
+    SET_REG 'a' 2
+    CHECK_REG 'a' 2
+    SET_REG 'b' 3
+    CHECK_REG 'b' 3
+    SET_REG 'c' 4
+    CHECK_REG 'c' 4
+    EXECUTE 1
+    CHECK_IP 2
+    CHECK_RH 5
+    CHECK_WH 2
+    CHECK_FH 3
+    CHECK_REG 'a' 2
+    CHECK_REG 'b' 3
+    CHECK_REG 'c' 4
+    LOAD_GENOME "wcxxxxxxxxxx" // NopC -> WH += Reg C
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 3
+    CHECK_FH 3
+    SET_REG 'a' 2
+    CHECK_REG 'a' 2
+    SET_REG 'b' 3
+    CHECK_REG 'b' 3
+    SET_REG 'c' 4
+    CHECK_REG 'c' 4
+    EXECUTE 1
+    CHECK_IP 2
+    CHECK_RH 1
+    CHECK_WH 6
+    CHECK_FH 3
+    CHECK_REG 'a' 2
+    CHECK_REG 'b' 3
+    CHECK_REG 'c' 4
+  // Move head
+    LOAD_GENOME "vxxxxxxxxxxx" // No nops -> IP = FH
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 8
+    CHECK_FH 8
+    EXECUTE 1
+    CHECK_IP 8
+    CHECK_RH 1
+    CHECK_WH 2
+    CHECK_FH 8
+    LOAD_GENOME "vaxxxxxxxxxx" // NopA -> IP = FH
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 8
+    CHECK_FH 8
+    EXECUTE 1
+    CHECK_IP 8
+    CHECK_RH 1
+    CHECK_WH 2
+    CHECK_FH 8
+    LOAD_GENOME "vbxxxxxxxxxx" // NopB -> RH = FH
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 8
+    CHECK_FH 8
+    EXECUTE 1
+    CHECK_IP 2 // Executed move head + nop
+    CHECK_RH 8
+    CHECK_WH 2
+    CHECK_FH 8
+    LOAD_GENOME "vcxxxxxxxxxx" // NopC -> WH = FH
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 8
+    CHECK_FH 8
+    EXECUTE 1
+    CHECK_IP 2 // Executed move head + nop
+    CHECK_RH 1
+    CHECK_WH 8
+    CHECK_FH 8
+  // Set flow
+    LOAD_GENOME "zxxxxxxxxxxx" // No nops -> FH = Reg C
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 3
+    CHECK_FH 3
+    SET_REG 'a' 4
+    CHECK_REG 'a' 4
+    SET_REG 'b' 5
+    CHECK_REG 'b' 5
+    SET_REG 'c' 6
+    CHECK_REG 'c' 6
+    EXECUTE 1
+    CHECK_FH 6 
+    LOAD_GENOME "zaxxxxxxxxxx" // NopA -> FH = Reg A
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 3
+    CHECK_FH 3
+    SET_REG 'a' 4
+    CHECK_REG 'a' 4
+    SET_REG 'b' 5
+    CHECK_REG 'b' 5
+    SET_REG 'c' 6
+    CHECK_REG 'c' 6
+    EXECUTE 1
+    CHECK_FH 4 
+    LOAD_GENOME "zbxxxxxxxxxx" // NopB -> FH = Reg B
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 3
+    CHECK_FH 3
+    SET_REG 'a' 4
+    CHECK_REG 'a' 4
+    SET_REG 'b' 5
+    CHECK_REG 'b' 5
+    SET_REG 'c' 6
+    CHECK_REG 'c' 6
+    EXECUTE 1
+    CHECK_FH 5 
+    LOAD_GENOME "zcxxxxxxxxxx" // NopC -> FH = Reg C
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 3
+    CHECK_FH 3
+    SET_REG 'a' 4
+    CHECK_REG 'a' 4
+    SET_REG 'b' 5
+    CHECK_REG 'b' 5
+    SET_REG 'c' 6
+    CHECK_REG 'c' 6
+    EXECUTE 1
+    CHECK_FH 6 
+  
+// Stack manipulation instructions
+  // Push
+    // No nops, push register B onto stack A
+      LOAD_GENOME "ggggggggggg" 
+      SET_REG 'a' 4
+      CHECK_REG 'a' 4
+      SET_REG 'b' 5
+      CHECK_REG 'b' 5
+      SET_REG 'c' 6
+      CHECK_REG 'c' 6
+      SET_IP 0
+      CHECK_IP 0
+      SET_RH 1
+      CHECK_RH 1
+      SET_WH 2
+      CHECK_WH 2
+      SET_FH 3
+      CHECK_FH 3
+      EXECUTE 1
+      CHECK_STACK_A 0 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 5
+      CHECK_REG 'c' 6
+      CHECK_IP 1 // Advance
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      SET_REG 'b' 7
+      CHECK_REG 'b' 7
+      EXECUTE 1
+      CHECK_STACK_A 0 7
+      CHECK_STACK_A 1 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 7
+      CHECK_REG 'c' 6
+      CHECK_IP 2 // Advance
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      SET_REG 'b' 9
+      CHECK_REG 'b' 9
+      EXECUTE 1
+      CHECK_STACK_A 0 9
+      CHECK_STACK_A 1 7
+      CHECK_STACK_A 2 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 9
+      CHECK_REG 'c' 6
+      CHECK_IP 3 // Advance
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      SET_REG 'b' 9
+      CHECK_REG 'b' 9
+
+  // Pop
+  // Swap Stack

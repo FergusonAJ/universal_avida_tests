@@ -1,0 +1,72 @@
+// Ensure NopA doesn't change anything
+  LOAD_GENOME "aaaaaaaa"
+  SET_REG 'a' 1 
+  CHECK_REG 'a' 1
+  SET_REG 'b' 2
+  CHECK_REG 'b' 2
+  SET_REG 'c' 3
+  CHECK_REG 'c' 3
+  SET_IP 0
+  CHECK_IP 0
+  SET_RH 1
+  CHECK_RH 1
+  SET_WH 2
+  CHECK_WH 2
+  SET_FH 3
+  CHECK_FH 3
+  EXECUTE 1
+  CHECK_REG 'a' 1
+  CHECK_REG 'b' 2
+  CHECK_REG 'c' 3
+  CHECK_IP 1 // Advanced 1
+  CHECK_RH 1
+  CHECK_WH 2
+  CHECK_FH 3
+// Ensure NopB doesn't change anything
+  LOAD_GENOME "bbbbbbbb"
+  SET_REG 'a' 1 
+  CHECK_REG 'a' 1
+  SET_REG 'b' 2
+  CHECK_REG 'b' 2
+  SET_REG 'c' 3
+  CHECK_REG 'c' 3
+  SET_IP 0
+  CHECK_IP 0
+  SET_RH 1
+  CHECK_RH 1
+  SET_WH 2
+  CHECK_WH 2
+  SET_FH 3
+  CHECK_FH 3
+  EXECUTE 1
+  CHECK_REG 'a' 1
+  CHECK_REG 'b' 2
+  CHECK_REG 'c' 3
+  CHECK_IP 1 // Advanced 1
+  CHECK_RH 1
+  CHECK_WH 2
+  CHECK_FH 3
+// Ensure NopC doesn't change anything
+  LOAD_GENOME "cccccccc"
+  SET_REG 'a' 1 
+  CHECK_REG 'a' 1
+  SET_REG 'b' 2
+  CHECK_REG 'b' 2
+  SET_REG 'c' 3
+  CHECK_REG 'c' 3
+  SET_IP 0
+  CHECK_IP 0
+  SET_RH 1
+  CHECK_RH 1
+  SET_WH 2
+  CHECK_WH 2
+  SET_FH 3
+  CHECK_FH 3
+  EXECUTE 1
+  CHECK_REG 'a' 1
+  CHECK_REG 'b' 2
+  CHECK_REG 'c' 3
+  CHECK_IP 1 // Advanced 1
+  CHECK_RH 1
+  CHECK_WH 2
+  CHECK_FH 3

@@ -1,0 +1,28 @@
+// Load genomes 
+  LOAD_GENOME "abcdefghijklmnopqrstuvwxyz"
+  LOAD_GENOME "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+  LOAD_GENOME "a"
+// Head Manipulation
+  LOAD_GENOME "abcdefghijklmnopqrstuvwxyz"
+  SET_IP 10
+  CHECK_IP 10
+  SET_RH 11
+  CHECK_RH 11
+  SET_WH 12
+  CHECK_WH 12
+  SET_FH 13
+  CHECK_FH 13
+// Register Manipulation
+  SET_REG 'a' 10
+  CHECK_REG 'a' 10
+  SET_REG 'a' 11
+  CHECK_REG 'a' 11
+  SET_REG 'b' 12
+  CHECK_REG 'b' 12
+  SET_REG 'b' 13
+  CHECK_REG 'b' 13
+  SET_REG 'c' 14
+  CHECK_REG 'c' 14
+  SET_REG 'c' 15
+  CHECK_REG 'c' 15
+

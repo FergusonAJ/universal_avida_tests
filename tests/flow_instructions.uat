@@ -1,0 +1,228 @@
+// If not equal
+  // Not equal
+    LOAD_GENOME "dxxxxxxxxxxxxx" // No nops and B != C -> execute instruction after if
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 1
+    LOAD_GENOME "daxxxxxxxxxxxx" // NopA and A != B -> execute instruction after nop
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 2
+    LOAD_GENOME "dbxxxxxxxxxxxx" // NopB and B != C -> execute instruction after nop
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 2
+    LOAD_GENOME "dcxxxxxxxxxxxx" // NopC and C != A -> execute instruction after nop 
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 2
+  // Equal
+    LOAD_GENOME "dxxxxxxxxxxxxx" // No nops and B == C -> skip instruction after if
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 2
+    CHECK_REG 'c' 2
+    EXECUTE 1
+    CHECK_IP 2
+    LOAD_GENOME "daxxxxxxxxxxxx" // NopA and A == B -> skip instruction after nop
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 1
+    CHECK_REG 'b' 1
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 3
+    LOAD_GENOME "dbxxxxxxxxxxxx" // NopB and B == C -> skip instruction after nop
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 2
+    CHECK_REG 'c' 2
+    EXECUTE 1
+    CHECK_IP 3
+    LOAD_GENOME "dcxxxxxxxxxxxx" // NopC and C == A -> skip instruction after nop 
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 3
+    CHECK_REG 'a' 3
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 3
+// If less 
+  // Less than
+    LOAD_GENOME "exxxxxxxxxxxxx" // No nops and B < C -> execute instruction after if
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 1
+    LOAD_GENOME "eaxxxxxxxxxxxx" // NopA and A < B -> execute instruction after nop
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 2
+    LOAD_GENOME "ebxxxxxxxxxxxx" // NopB and B < C -> execute instruction after nop
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 2
+    LOAD_GENOME "ecxxxxxxxxxxxx" // NopC and C < A -> execute instruction after nop 
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 4
+    CHECK_REG 'a' 4
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 2
+  // Equal
+    LOAD_GENOME "exxxxxxxxxxxxx" // No nops and B == C -> skip instruction after if
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 2
+    CHECK_REG 'c' 2
+    EXECUTE 1
+    CHECK_IP 2
+    LOAD_GENOME "eaxxxxxxxxxxxx" // NopA and A == B -> skip instruction after nop
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 1
+    CHECK_REG 'b' 1
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 3
+    LOAD_GENOME "ebxxxxxxxxxxxx" // NopB and B == C -> skip instruction after nop
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 2
+    CHECK_REG 'c' 2
+    EXECUTE 1
+    CHECK_IP 3
+    LOAD_GENOME "ecxxxxxxxxxxxx" // NopC and C == A -> skip instruction after nop 
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 3
+    CHECK_REG 'a' 3
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 3
+  // Greater than 
+    LOAD_GENOME "exxxxxxxxxxxxx" // No nops and B > C -> skip instruction after if
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 9
+    CHECK_REG 'b' 9
+    SET_REG 'c' 2
+    CHECK_REG 'c' 2
+    EXECUTE 1
+    CHECK_IP 2
+    LOAD_GENOME "eaxxxxxxxxxxxx" // NopA and A > B -> skip instruction after nop
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 9
+    CHECK_REG 'a' 9
+    SET_REG 'b' 1
+    CHECK_REG 'b' 1
+    SET_REG 'c' 3
+    CHECK_REG 'c' 3
+    EXECUTE 1
+    CHECK_IP 3
+    LOAD_GENOME "ebxxxxxxxxxxxx" // NopB and B > C -> skip instruction after nop
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 1
+    CHECK_REG 'a' 1
+    SET_REG 'b' 9
+    CHECK_REG 'b' 9
+    SET_REG 'c' 2
+    CHECK_REG 'c' 2
+    EXECUTE 1
+    CHECK_IP 3
+    LOAD_GENOME "ecxxxxxxxxxxxx" // NopC and C > A -> skip instruction after nop 
+    SET_IP 0
+    CHECK_IP 0
+    SET_REG 'a' 3
+    CHECK_REG 'a' 3
+    SET_REG 'b' 2
+    CHECK_REG 'b' 2
+    SET_REG 'c' 9
+    CHECK_REG 'c' 9
+    EXECUTE 1
+    CHECK_IP 3
+// If label
