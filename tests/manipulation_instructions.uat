@@ -367,8 +367,559 @@
       CHECK_RH 1
       CHECK_WH 2
       CHECK_FH 3
+    // NopA, push register A onto stack A
+      LOAD_GENOME "gagagagagaga" 
+      SET_REG 'a' 4
+      CHECK_REG 'a' 4
+      SET_REG 'b' 5
+      CHECK_REG 'b' 5
+      SET_REG 'c' 6
+      CHECK_REG 'c' 6
+      SET_IP 0
+      CHECK_IP 0
+      SET_RH 1
+      CHECK_RH 1
+      SET_WH 2
+      CHECK_WH 2
+      SET_FH 3
+      CHECK_FH 3
+      EXECUTE 1
+      CHECK_STACK_A 0 4
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 5
+      CHECK_REG 'c' 6
+      CHECK_IP 2 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      SET_REG 'a' 7
+      CHECK_REG 'a' 7
+      EXECUTE 1
+      CHECK_STACK_A 0 7
+      CHECK_STACK_A 1 4
+      CHECK_REG 'a' 7
+      CHECK_REG 'b' 5
+      CHECK_REG 'c' 6
+      CHECK_IP 4 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      SET_REG 'a' 9
+      CHECK_REG 'a' 9
+      EXECUTE 1
+      CHECK_STACK_A 0 9
+      CHECK_STACK_A 1 7
+      CHECK_STACK_A 2 4
+      CHECK_REG 'a' 9
+      CHECK_REG 'b' 5
+      CHECK_REG 'c' 6
+      CHECK_IP 6 // Advance
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+    // NopB, push register B onto stack A
+      LOAD_GENOME "gbgbgbgbgbgb" 
+      SET_REG 'a' 4
+      CHECK_REG 'a' 4
+      SET_REG 'b' 5
+      CHECK_REG 'b' 5
+      SET_REG 'c' 6
+      CHECK_REG 'c' 6
+      SET_IP 0
+      CHECK_IP 0
+      SET_RH 1
+      CHECK_RH 1
+      SET_WH 2
+      CHECK_WH 2
+      SET_FH 3
+      CHECK_FH 3
+      EXECUTE 1
+      CHECK_STACK_A 0 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 5
+      CHECK_REG 'c' 6
+      CHECK_IP 2 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      SET_REG 'b' 7
+      CHECK_REG 'b' 7
+      EXECUTE 1
+      CHECK_STACK_A 0 7
+      CHECK_STACK_A 1 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 7
+      CHECK_REG 'c' 6
+      CHECK_IP 4 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
       SET_REG 'b' 9
       CHECK_REG 'b' 9
+      EXECUTE 1
+      CHECK_STACK_A 0 9
+      CHECK_STACK_A 1 7
+      CHECK_STACK_A 2 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 9
+      CHECK_REG 'c' 6
+      CHECK_IP 6 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+    // NopC, push register C onto stack A
+      LOAD_GENOME "gcgcgcgcgcgc" 
+      SET_REG 'a' 4
+      CHECK_REG 'a' 4
+      SET_REG 'b' 5
+      CHECK_REG 'b' 5
+      SET_REG 'c' 6
+      CHECK_REG 'c' 6
+      SET_IP 0
+      CHECK_IP 0
+      SET_RH 1
+      CHECK_RH 1
+      SET_WH 2
+      CHECK_WH 2
+      SET_FH 3
+      CHECK_FH 3
+      EXECUTE 1
+      CHECK_STACK_A 0 6
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 5
+      CHECK_REG 'c' 6
+      CHECK_IP 2 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      SET_REG 'c' 7
+      CHECK_REG 'c' 7
+      EXECUTE 1
+      CHECK_STACK_A 0 7
+      CHECK_STACK_A 1 6
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 5
+      CHECK_REG 'c' 7
+      CHECK_IP 4 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      SET_REG 'c' 9
+      CHECK_REG 'c' 9
+      EXECUTE 1
+      CHECK_STACK_A 0 9
+      CHECK_STACK_A 1 7
+      CHECK_STACK_A 2 6
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 5
+      CHECK_REG 'c' 9
+      CHECK_IP 6 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
 
   // Pop
+    // No nops, pop stack A into register B
+      LOAD_GENOME "gggfffxxxxxx"
+      SET_REG 'a' 4
+      CHECK_REG 'a' 4
+      SET_REG 'b' 5
+      CHECK_REG 'b' 5
+      SET_REG 'c' 6
+      CHECK_REG 'c' 6
+      SET_IP 0
+      CHECK_IP 0
+      SET_RH 1
+      CHECK_RH 1
+      SET_WH 2
+      CHECK_WH 2
+      SET_FH 3
+      CHECK_FH 3
+      EXECUTE 1 // Push reg B onto stack A
+      CHECK_STACK_A 0 5
+      CHECK_IP 1 // Advance
+      SET_REG 'b' 7
+      CHECK_REG 'b' 7
+      EXECUTE 1 // Push reg B onto stack A
+      CHECK_STACK_A 0 7
+      CHECK_STACK_A 1 5
+      CHECK_IP 2 // Advance
+      SET_REG 'b' 9
+      CHECK_REG 'b' 9
+      EXECUTE 1 // Push reg B onto stack A
+      CHECK_STACK_A 0 9
+      CHECK_STACK_A 1 7
+      CHECK_STACK_A 2 5
+      CHECK_IP 3 // Advance
+      SET_REG 'b' 11
+      CHECK_REG 'b' 11
+      EXECUTE 1 // Pop stack A into register B
+      CHECK_STACK_A 0 7
+      CHECK_STACK_A 1 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 9 
+      CHECK_REG 'c' 6
+      CHECK_IP 4 // Advance
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      EXECUTE 1 // Pop stack A into register B
+      CHECK_STACK_A 0 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 7 
+      CHECK_REG 'c' 6
+      CHECK_IP 5 // Advance
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      EXECUTE 1 // Pop stack A into register B
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 5 
+      CHECK_REG 'c' 6
+      CHECK_IP 6 // Advance
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+    // NopA, pop stack A into register A
+      LOAD_GENOME "gggfafafaxxx"
+      SET_REG 'a' 4
+      CHECK_REG 'a' 4
+      SET_REG 'b' 5
+      CHECK_REG 'b' 5
+      SET_REG 'c' 6
+      CHECK_REG 'c' 6
+      SET_IP 0
+      CHECK_IP 0
+      SET_RH 1
+      CHECK_RH 1
+      SET_WH 2
+      CHECK_WH 2
+      SET_FH 3
+      CHECK_FH 3
+      EXECUTE 1 // Push reg B onto stack A
+      CHECK_STACK_A 0 5
+      CHECK_IP 1 // Advance
+      SET_REG 'b' 7
+      CHECK_REG 'b' 7
+      EXECUTE 1 // Push reg B onto stack A
+      CHECK_STACK_A 0 7
+      CHECK_STACK_A 1 5
+      CHECK_IP 2 // Advance
+      SET_REG 'b' 9
+      CHECK_REG 'b' 9
+      EXECUTE 1 // Push reg B onto stack A
+      CHECK_STACK_A 0 9
+      CHECK_STACK_A 1 7
+      CHECK_STACK_A 2 5
+      CHECK_IP 3 // Advance
+      SET_REG 'b' 11
+      CHECK_REG 'b' 11
+      EXECUTE 1 // Pop stack A into register A
+      CHECK_STACK_A 0 7
+      CHECK_STACK_A 1 5
+      CHECK_REG 'a' 9
+      CHECK_REG 'b' 11 
+      CHECK_REG 'c' 6
+      CHECK_IP 5 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      EXECUTE 1 // Pop stack A into register A
+      CHECK_STACK_A 0 5
+      CHECK_REG 'a' 7
+      CHECK_REG 'b' 11 
+      CHECK_REG 'c' 6
+      CHECK_IP 7 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      EXECUTE 1 // Pop stack A into register A
+      CHECK_REG 'a' 5
+      CHECK_REG 'b' 11 
+      CHECK_REG 'c' 6
+      CHECK_IP 9 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+    // NopB, pop stack A into register B
+      LOAD_GENOME "gggfbfbfbxxx"
+      SET_REG 'a' 4
+      CHECK_REG 'a' 4
+      SET_REG 'b' 5
+      CHECK_REG 'b' 5
+      SET_REG 'c' 6
+      CHECK_REG 'c' 6
+      SET_IP 0
+      CHECK_IP 0
+      SET_RH 1
+      CHECK_RH 1
+      SET_WH 2
+      CHECK_WH 2
+      SET_FH 3
+      CHECK_FH 3
+      EXECUTE 1 // Push reg B onto stack A
+      CHECK_STACK_A 0 5
+      CHECK_IP 1 // Advance
+      SET_REG 'b' 7
+      CHECK_REG 'b' 7
+      EXECUTE 1 // Push reg B onto stack A
+      CHECK_STACK_A 0 7
+      CHECK_STACK_A 1 5
+      CHECK_IP 2 // Advance
+      SET_REG 'b' 9
+      CHECK_REG 'b' 9
+      EXECUTE 1 // Push reg B onto stack A
+      CHECK_STACK_A 0 9
+      CHECK_STACK_A 1 7
+      CHECK_STACK_A 2 5
+      CHECK_IP 3 // Advance
+      SET_REG 'b' 11
+      CHECK_REG 'b' 11
+      EXECUTE 1 // Pop stack A into register B
+      CHECK_STACK_A 0 7
+      CHECK_STACK_A 1 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 9 
+      CHECK_REG 'c' 6
+      CHECK_IP 5 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      EXECUTE 1 // Pop stack A into register B
+      CHECK_STACK_A 0 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 7 
+      CHECK_REG 'c' 6
+      CHECK_IP 7 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      EXECUTE 1 // Pop stack A into register B
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 5 
+      CHECK_REG 'c' 6
+      CHECK_IP 9 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+    // NopC, pop stack A into register C
+      LOAD_GENOME "gggfcfcfcxxx"
+      SET_REG 'a' 4
+      CHECK_REG 'a' 4
+      SET_REG 'b' 5
+      CHECK_REG 'b' 5
+      SET_REG 'c' 6
+      CHECK_REG 'c' 6
+      SET_IP 0
+      CHECK_IP 0
+      SET_RH 1
+      CHECK_RH 1
+      SET_WH 2
+      CHECK_WH 2
+      SET_FH 3
+      CHECK_FH 3
+      EXECUTE 1 // Push reg B onto stack A
+      CHECK_STACK_A 0 5
+      CHECK_IP 1 // Advance
+      SET_REG 'b' 7
+      CHECK_REG 'b' 7
+      EXECUTE 1 // Push reg B onto stack A
+      CHECK_STACK_A 0 7
+      CHECK_STACK_A 1 5
+      CHECK_IP 2 // Advance
+      SET_REG 'b' 9
+      CHECK_REG 'b' 9
+      EXECUTE 1 // Push reg B onto stack A
+      CHECK_STACK_A 0 9
+      CHECK_STACK_A 1 7
+      CHECK_STACK_A 2 5
+      CHECK_IP 3 // Advance
+      SET_REG 'b' 11
+      CHECK_REG 'b' 11
+      EXECUTE 1 // Pop stack A into register C
+      CHECK_STACK_A 0 7
+      CHECK_STACK_A 1 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 11 
+      CHECK_REG 'c' 9
+      CHECK_IP 5 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      EXECUTE 1 // Pop stack A into register C
+      CHECK_STACK_A 0 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 11 
+      CHECK_REG 'c' 7
+      CHECK_IP 7 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      EXECUTE 1 // Pop stack A into register C
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 11 
+      CHECK_REG 'c' 5
+      CHECK_IP 9 // Advance + skip nop
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+    // No nops, but swap first so stack B is active. Should pop into register B
+      LOAD_GENOME "hgggfffhxxxx"
+      EXECUTE 1 // Swap stacks, make B active
+      SET_REG 'a' 4
+      CHECK_REG 'a' 4
+      SET_REG 'b' 5
+      CHECK_REG 'b' 5
+      SET_REG 'c' 6
+      CHECK_REG 'c' 6
+      CHECK_IP 1
+      SET_RH 1
+      CHECK_RH 1
+      SET_WH 2
+      CHECK_WH 2
+      SET_FH 3
+      CHECK_FH 3
+      EXECUTE 1 // Push reg B onto stack B
+      CHECK_STACK_B 0 5
+      CHECK_IP 2 // Advance
+      SET_REG 'b' 7
+      CHECK_REG 'b' 7
+      EXECUTE 1 // Push reg B onto stack B
+      CHECK_STACK_B 0 7
+      CHECK_STACK_B 1 5
+      CHECK_IP 3 // Advance
+      SET_REG 'b' 9
+      CHECK_REG 'b' 9
+      EXECUTE 1 // Push reg B onto stack B
+      CHECK_STACK_B 0 9
+      CHECK_STACK_B 1 7
+      CHECK_STACK_B 2 5
+      CHECK_IP 4 // Advance
+      SET_REG 'b' 11
+      CHECK_REG 'b' 11
+      EXECUTE 1 // Pop stack B into register B
+      CHECK_STACK_B 0 7
+      CHECK_STACK_B 1 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 9 
+      CHECK_REG 'c' 6
+      CHECK_IP 5 // Advance
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      EXECUTE 1 // Pop stack B into register B
+      CHECK_STACK_B 0 5
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 7 
+      CHECK_REG 'c' 6
+      CHECK_IP 6 // Advance
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      EXECUTE 1 // Pop stack B into register B
+      CHECK_REG 'a' 4
+      CHECK_REG 'b' 5 
+      CHECK_REG 'c' 6
+      CHECK_IP 7 // Advance
+      CHECK_RH 1
+      CHECK_WH 2
+      CHECK_FH 3
+      EXECUTE 1 // Swap stacks again just in case LOAD_GENOME does not reset it
+
   // Swap Stack
+    // Append to A twice, switch, append to B twice, switch, append to A one more time 
+    LOAD_GENOME "gghgghgg" 
+    SET_REG 'a' 4
+    CHECK_REG 'a' 4
+    SET_REG 'b' 5
+    CHECK_REG 'b' 5
+    SET_REG 'c' 6
+    CHECK_REG 'c' 6
+    SET_IP 0
+    CHECK_IP 0
+    SET_RH 1
+    CHECK_RH 1
+    SET_WH 2
+    CHECK_WH 2
+    SET_FH 3
+    CHECK_FH 3
+    EXECUTE 1 // Add value in register B to stack A
+    CHECK_STACK_A 0 5
+    CHECK_REG 'a' 4
+    CHECK_REG 'b' 5
+    CHECK_REG 'c' 6
+    CHECK_IP 1 // Advance
+    CHECK_RH 1
+    CHECK_WH 2
+    CHECK_FH 3
+    SET_REG 'b' 7
+    CHECK_REG 'b' 7
+    EXECUTE 1 // Add value in register B to stack A
+    CHECK_STACK_A 0 7
+    CHECK_STACK_A 1 5
+    CHECK_REG 'a' 4
+    CHECK_REG 'b' 7
+    CHECK_REG 'c' 6
+    CHECK_IP 2 // Advance
+    CHECK_RH 1
+    CHECK_WH 2
+    CHECK_FH 3
+    EXECUTE 1 // Swap. Stack B is now active
+    CHECK_STACK_A 0 7
+    CHECK_STACK_A 1 5
+    CHECK_REG 'a' 4
+    CHECK_REG 'b' 7
+    CHECK_REG 'c' 6
+    CHECK_IP 3 // Advance
+    CHECK_RH 1
+    CHECK_WH 2
+    CHECK_FH 3
+    SET_REG 'b' 9
+    CHECK_REG 'b' 9
+    EXECUTE 1 // Add value in register B to stack B
+    CHECK_STACK_B 0 9
+    CHECK_STACK_A 0 7
+    CHECK_STACK_A 1 5
+    CHECK_REG 'a' 4
+    CHECK_REG 'b' 9
+    CHECK_REG 'c' 6
+    CHECK_IP 4 // Advance
+    CHECK_RH 1
+    CHECK_WH 2
+    CHECK_FH 3
+    SET_REG 'b' 11 
+    CHECK_REG 'b' 11
+    EXECUTE 1 // Add value in register B to stack B
+    CHECK_STACK_B 0 11 
+    CHECK_STACK_B 1 9
+    CHECK_STACK_A 0 7
+    CHECK_STACK_A 1 5
+    CHECK_IP 5 // Advance
+    EXECUTE 1 // Swap. Stack A is now active
+    CHECK_STACK_B 0 11 
+    CHECK_STACK_B 1 9
+    CHECK_STACK_A 0 7
+    CHECK_STACK_A 1 5
+    CHECK_REG 'a' 4
+    CHECK_REG 'b' 11
+    CHECK_REG 'c' 6
+    CHECK_IP 6 // Advance
+    CHECK_RH 1
+    CHECK_WH 2
+    CHECK_FH 3
+    SET_REG 'b' 13
+    CHECK_REG 'b' 13
+    EXECUTE 1 // Add value in register B to stack A
+    CHECK_STACK_B 0 11 
+    CHECK_STACK_B 1 9
+    CHECK_STACK_A 0 13 
+    CHECK_STACK_A 1 7
+    CHECK_STACK_A 2 5
+    CHECK_REG 'a' 4
+    CHECK_REG 'b' 13
+    CHECK_REG 'c' 6
+    CHECK_IP 7 // Advance
+    CHECK_RH 1
+    CHECK_WH 2
+    CHECK_FH 3
+    
