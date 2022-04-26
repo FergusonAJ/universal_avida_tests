@@ -61,6 +61,12 @@ namespace uat{
       raw_function_map["CHECK_FH"] = [this](emp::vector<std::string>& line_parts){
          CheckFH_Raw(line_parts);
       };
+      raw_function_map["CHECK_STACK_A"] = [this](emp::vector<std::string>& line_parts){
+         CheckStackA_Raw(line_parts);
+      };
+      raw_function_map["CHECK_STACK_B"] = [this](emp::vector<std::string>& line_parts){
+         CheckStackB_Raw(line_parts);
+      };
     }
     
     void ThrowLineError(const std::string& error_str){
@@ -159,6 +165,22 @@ namespace uat{
       data_t val = emp::from_string<data_t>(line_parts[1]); 
       CheckFH(val);
     }
+    void CheckStackA_Raw(emp::vector<std::string>& line_parts){
+      if(line_parts.size() != 3){
+        ThrowLineError("CHECK_STACK_A expects exactly two arguments (the index of the value to check, and the value to check it against)");
+      }
+      size_t idx = emp::from_string<data_t>(line_parts[1]); 
+      data_t val = emp::from_string<data_t>(line_parts[2]); 
+      CheckStackA(idx, val);
+    }
+    void CheckStackB_Raw(emp::vector<std::string>& line_parts){
+      if(line_parts.size() != 3){
+        ThrowLineError("CHECK_STACK_B expects exactly two arguments (the index of the value to check, and the value to check it against)");
+      }
+      size_t idx = emp::from_string<data_t>(line_parts[1]); 
+      data_t val = emp::from_string<data_t>(line_parts[2]); 
+      CheckStackB(idx, val);
+    }
 
   public: 
     UATInterpreter(){ 
@@ -234,6 +256,8 @@ namespace uat{
     virtual void CheckRH(data_t /*val*/) = 0; 
     virtual void CheckWH(data_t /*val*/) = 0; 
     virtual void CheckFH(data_t /*val*/) = 0; 
+    virtual void CheckStackA(size_t /*idx*/, data_t /*val*/) = 0; 
+    virtual void CheckStackB(size_t /*idx*/, data_t /*val*/) = 0; 
 
   };
 

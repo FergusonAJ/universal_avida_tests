@@ -31,6 +31,8 @@ class UAT_Interpreter_Base():
     self.keyword_map['CHECK_RH'] = self.check_rh_raw
     self.keyword_map['CHECK_WH'] = self.check_wh_raw
     self.keyword_map['CHECK_FH'] = self.check_fh_raw
+    self.keyword_map['CHECK_STACK_A'] = self.check_stack_a_raw
+    self.keyword_map['CHECK_STACK_B'] = self.check_stack_b_raw
 
   def process_line(self, line):
     if '//' in line:
@@ -156,6 +158,22 @@ class UAT_Interpreter_Base():
     expected_val = int(line_parts[0])
     self.check_fh(expected_val)
 
+  def check_stack_a_raw(self, line_parts):
+    if len(line_parts) != 2:
+      error_str = 'CHECK_STACK_A expects exactly one argument (the value to check the IP against)'
+      self.throw_line_error(error_str)
+    idx = int(line_parts[0])
+    expected_val = int(line_parts[1])
+    self.check_stack_a(idx, expected_val)
+
+  def check_stack_b_raw(self, line_parts):
+    if len(line_parts) != 2:
+      error_str = 'CHECK_STACK_B expects exactly one argument (the value to check the IP against)'
+      self.throw_line_error(error_str)
+    idx = int(line_parts[0])
+    expected_val = int(line_parts[1])
+    self.check_stack_a(idx, expected_val)
+
   def trigger_undefined_keyword(self, keyword):
     print(self.ansi_code_error + 'Error! ' + keyword + ' has not been defined in the interpreter!' + self.ansi_code_clear)
     quit()
@@ -184,5 +202,9 @@ class UAT_Interpreter_Base():
     self.trigger_undefined_keyword('CHECK_WH')
   def check_fh(self, val):
     self.trigger_undefined_keyword('CHECK_FH')
+  def check_stack_a(self, idx, val):
+    self.trigger_undefined_keyword('CHECK_STACK_A')
+  def check_stack_b(self, idx, val):
+    self.trigger_undefined_keyword('CHECK_STACK_B')
 
 
